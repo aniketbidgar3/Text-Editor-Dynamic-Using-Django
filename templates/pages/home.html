@@ -4,8 +4,142 @@
 {% block title %}Home page{% endblock title %}
 
 {% block content %}
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-  <img src="{% static 'images/logo.png' %}" class="img-fluid" alt="DjangoX logo"/>
-  <p class="lead">A Django starter project with batteries.</p>
-</div>
+<div >
+  
+  <h1 class="text_black head" >Text Editor</h1>
+
+    <div class="container bg-light">
+      <h1 class="mb-4">
+        <input
+          type="text"
+          placeholder="Enter Title ...   "
+          id="title"
+          oninput="previewTitle()"
+          style="width: 40%"
+        />
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#myModal"
+        >
+          Preview
+        </button>
+      </h1>
+
+      <textarea
+        id="textInput"
+        placeholder="Enter text here..."
+        oninput="updatePreview()"
+        style="resize: none"
+        class="mx-auto"
+      ></textarea>
+
+      <div class="buttons mt-3">
+        <select
+          name="fonts"
+          id="fonts"
+          class="btn btn-md btn-outline-primary my-1"
+          onchange="applyFont()"
+        >
+          <option value="Helvetica" style="font-family: Helvetica, sans-serif">
+            Helvetica
+          </option>
+          <option
+            value="Times New Roman"
+            style="font-family: Times New Roman, serif"
+          >
+            Times New Roman
+          </option>
+          <option
+            value="Courier New"
+            style="font-family: Courier New, monospace"
+          >
+            Courier New
+          </option>
+          <option value="cursive" style="font-family: cursive">Cursive</option>
+        </select>
+        <button
+          class="btn btn-primary my-1"
+          id="read"
+          onclick="speak_and_stop()"
+        >
+          Read aloud
+        </button>
+
+        <button
+          class="btn btn-primary my-1"
+          onclick="startSpeechRecognition()"
+          id="voiceTyping"
+        >
+          Voice Typing
+        </button>
+        <button class="btn btn-primary my-1" onclick="uppercaseText()">
+          Uppercase <b>(A)</b>
+        </button>
+        <button class="btn btn-primary my-1" onclick="lowercaseText()">
+          Lowercase <b>(a)</b>
+        </button>
+        <button class="btn btn-primary my-1" onclick="capitalize()">
+          Capitalize <b>(Aa)</b>
+        </button>
+
+        <button class="btn btn-primary my-1" onclick="removeExtraSpaces()">
+          Remove Extra Spaces
+        </button>
+
+        <button class="btn btn-primary my-1" onclick="copyText()">
+          <i class="fa fa-copy"></i> Copy
+        </button>
+
+        <button id="cmd" onclick="downloadPDF()" class="btn btn-success my-1">
+          <i class="fa fa-download"></i> Download
+        </button>
+        <button onclick="clearText()" class="btn btn-danger my-1">
+          <i class="fa fa-remove"></i> Clear
+        </button>
+      </div>
+    </div>
+
+    <div class="modal" id="myModal">
+      <div class="modal-lg modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          
+          <div class="modal-header mx-auto">
+            <h3 id="previewTitle" class="text_black"></h3>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div id="previewSection" class="text_black"></div>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button
+              id="cmd"
+              onclick="downloadPDF()"
+              class="btn btn-success my-1"
+            >
+              <i class="fa fa-download"></i> Download
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    
+  <script src="{% static 'js/base.js' %}"></script>
+  </div>
 {% endblock content %}
